@@ -1,0 +1,13 @@
+plugin: gcp_compute
+projects:
+  - infra-384407
+zones:
+  - "europe-west1-b"
+filters: []
+auth_kind: serviceaccount
+service_account_file: "~/.gcp/infra-384407-950682775fcf.json"
+groups:
+  prod: "'prod' in name"
+  stage: "'stage' in name"
+  app: "'app' in name"
+  db: "'db' in name"

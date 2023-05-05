@@ -1,6 +1,12 @@
-[stage]
-appserver ansible_host=34.140.86.251
-dbserver ansible_host=34.78.16.35
+
+[app]
+appserver-stage ansible_host=34.140.86.251
+[db]
+dbserver-stage ansible_host=34.78.16.35
+[stage:children]
+app
+db
+
 [prod]
-appserver ansible_host=34.78.144.230
-dbserver ansible_host=34.79.234.17
+appserver-prod ansible_host=34.78.144.230
+dbserver-prod ansible_host=34.79.234.17
