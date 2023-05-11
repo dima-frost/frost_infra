@@ -1,8 +1,8 @@
 resource "google_compute_instance" "db" {
-  name = "reddit-db-${var.env}"
+  name = "db-${var.env}"
   machine_type = "e2-micro"
   zone = "europe-west1-b"
-  tags = ["reddit-db-${var.env}"]
+  tags = ["db-${var.env}"]
   metadata = {
     ssh-keys = "appuser:${file(var.public_key_path)}\nappuser1:${file(var.public_key_path)}"
   }
@@ -23,16 +23,16 @@ resource "google_compute_instance" "db" {
 }
 
 resource "google_compute_address" "db_ip" {
-  name = "reddit-db-ip-${var.env}"
+  name = "db-ip-${var.env}"
 }
 
-resource "google_compute_firewall" "firewall_mongo" {
-  name = "allow-mongo-default-${var.env}"
+resource "google_compute_firewall" "firewall_mysql" {
+  name = "allow-mysql-default-${var.env}"
   network = "default"
   allow {
     protocol = "tcp"
     ports = ["27017"]
   }
-  target_tags = ["reddit-db-${var.env}"]
-  source_tags = ["reddit-db-${var.env}"]
+  target_tags = ["db-${var.env}"]
+  source_tags = ["db-${var.env}"]
 }

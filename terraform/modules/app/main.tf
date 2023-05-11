@@ -1,8 +1,8 @@
 resource "google_compute_instance" "app" {
-  name = "reddit-app-${var.env}"
+  name = "app-${var.env}"
   machine_type = "e2-micro"
   zone = "europe-west1-b"
-  tags = ["reddit-app-${var.env}"]
+  tags = ["app-${var.env}"]
   metadata = {
     ssh-keys = "appuser:${file(var.public_key_path)}\nappuser1:${file(var.public_key_path)}"
   }
@@ -23,16 +23,16 @@ resource "google_compute_instance" "app" {
 }
 
 resource "google_compute_address" "app_ip" {
-  name = "reddit-app-ip-${var.env}"
+  name = "app-ip-${var.env}"
 }
 
-resource "google_compute_firewall" "firewall_puma" {
-  name = "allow-puma-default-${var.env}"
+resource "google_compute_firewall" "firewall_app" {
+  name = "allow-app-default-${var.env}"
   network = "default"
   allow {
     protocol = "tcp"
     ports = ["9292"]
 }
   source_ranges = ["0.0.0.0/0"]
-  target_tags = ["reddit-app-${var.env}"]
+  target_tags = ["app-${var.env}"]
 }

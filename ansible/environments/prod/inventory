@@ -1,0 +1,8 @@
+
+[app]
+appserver-prod ansible_host=34.140.86.251
+[db]
+dbserver-prod ansible_host=34.78.16.35
+[prod:children]
+app
+db

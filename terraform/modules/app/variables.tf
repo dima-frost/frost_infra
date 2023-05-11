@@ -6,7 +6,7 @@ variable zone {
 }
 variable app_disk_image {
   description = "Disk image for reddit app"
-  default= "reddit-base-app"
+  default="reddit-base-app"
 }
 variable "env" {
   description = "Environment"

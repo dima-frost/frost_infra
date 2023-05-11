@@ -18,3 +18,7 @@ variable "env" {
   description = "Environment"
   default = "stage"
 }
+variable "admin_ip" {
+  description = "Admin's ip for ssh"
+  default = ["0.0.0.0/0"]
+}
