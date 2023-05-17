@@ -1,0 +1,20 @@
+# {{ ansible_managed }}
+user www-data;
+worker_processes auto;
+pid /run/nginx.pid;
+
+events {
+    worker_connections 1024;
+}
+
+http {
+    server {
+    listen       80 default_server;
+    location / {
+    
+        proxy_pass http://{{ app_ip }}:{{ app_port }};
+        }
+}
+  
+}
+
