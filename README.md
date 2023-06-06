@@ -48,3 +48,5 @@ Docker rm & rmi
 
 >docker rm $(docker ps -a -q) # remove all working containers
 >docker rmi $(docker images -q)
+
+# Docker-2
