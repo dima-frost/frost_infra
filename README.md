@@ -46,5 +46,34 @@ Docker rm & rmi
 > docker rm # remove container, with parram -f remove working container(sigkill)
 > docker rmi # remove image if image doesn't have container that depend on it image
 
->docker rm $(docker ps -a -q) # remove all working containers
->docker rmi $(docker images -q)
+> docker rm $(docker ps -a -q) # remove all working containers
+> docker rmi $(docker images -q)
+
+
+# Docker-3
+
+### HOWTO BUILD
+
+docker pull mongo:latest
+docker build -t dimafrost/post:1.0 ./post-py
+docker build -t dimafrost/comment:1.0 ./comment
+docker build -t dimafrost/ui:1.0 ./ui
+
+### HOWTO RUN
+
+> docker network create reddit
+> docker run -d --network=reddit --network-alias=post_db --network-alias=comment_db mongo:latest
+> docker run -d --network=reddit --network-alias=post dimafrost/post:1.0
+> docker run -d --network=reddit --network-alias=comment dimafrost/comment:1.0
+> docker run -d --network=reddit -p 9292:9292 dimafrost/ui:1.0
+
+### ADD VOLUME
+
+> docker volume create reddit_db
+
+> docker run -d --network=reddit --network-alias=post_db \
+--network-alias=comment_db -v reddit_db:/data/db mongo:latest
+
+### KILL ALL
+
+ for i in $(docker ps -q); do docker kill $i; done
