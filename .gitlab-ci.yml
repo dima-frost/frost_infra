@@ -47,7 +47,7 @@ staging:
     url: https://beta.example.com
 
 production:
-  stage: post
+  stage: deploy
   when: manual
   script:
     - echo 'Deploy'
