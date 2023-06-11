@@ -41,7 +41,7 @@ deploy_dev_job:
     url: http://dev.example.com
 
 staging:
-  stage: deploy
+  stage: stage
   when: manual
   script:
     - echo 'Deploy'
@@ -50,7 +50,7 @@ staging:
     url: https://beta.example.com
 
 production:
-  stage: deploy
+  stage: production
   when: manual
   script:
     - echo 'Deploy'
